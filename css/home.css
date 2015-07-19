@@ -1,0 +1,75 @@
+body, html{
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	background-color:#000000;
+}
+
+.jumbotron{
+	width: 100%;
+	height: 100%;	
+	min-height: 512px;
+	background-image: url("../imgs/piano.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	text-align: center;
+	overflow: hidden;
+}
+
+.f_form{
+	margin: 0 auto;
+	margin-top: 25%;
+	padding: 32px;
+	width: 256px;
+}
+
+.i_home{
+	border: 1px solid #efefef;
+	width: 256px;
+	height: 32px;
+	box-shadow: 3px 3px 3px 3px #88888888;
+	color: #666666;
+}
+
+.top{
+	border-radius: 3px 3px 0 0;
+	margin-bottom: .04em;
+}
+
+.bottom{
+	border-radius: 0 0 3px 3px;
+}
+	
+.i_submit{
+	background-color: #3399FF;
+	color: #efefef;
+	width: 256px;
+	font-family: "Shift", Verdana;
+	text-align: center;
+	line-height: 48px;
+	vertical-align: middle;
+	font-size: 1.5em;
+	text-transform: lowercase;
+	margin-left: 2px;
+	margin-top: 16px;
+}
+
+.title{
+	font-size: 3em;
+	width: 256px;
+	color: #ffffff;
+	text-shadow: 1px 1px #141414;
+	padding-bottom: 16px;
+	font-family: "Shift", Verdana;
+	text-transform: lowercase;
+}
+
+.foot{
+	position: absolute;
+	width: 100%;
+	height: 10%;
+	min-height: 64px;
+	background-color: #000000;
+	border-top: 1px solid #666666;
+	border-radius: 3px;
+}
