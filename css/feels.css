@@ -17,7 +17,7 @@ body, html{
 	margin: 0 auto;
 	width 768px;
 	height: 64px;
-	background-color: black;
+	background-color: #000000;
 	border-bottom: 1px inset #efefef;
 	color: #efefef;
 }

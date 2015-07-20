@@ -54,6 +54,10 @@ body, html{
 	cursor: pointer;
 }
 
+.i_submit:hover{
+	background-color: #297ACC;
+}
+
 .title{
 	font-size: 3em;
 	width: 256px;

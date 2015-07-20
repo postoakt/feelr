@@ -6,7 +6,7 @@
 	<body>
 		<div id = "wrapper">
 		<div id = "header">
-			<h1>feel<span style = "color: blue;">r</span></h1>
+			<h1>feelr</h1>
 			<p>let it all out.</p>
 		</div> <!-- header -->
 			<div class = "feel">
