@@ -18,7 +18,7 @@ body, html{
 
 .f_form{
 	margin: 0 auto;
-	margin-top: 25%;
+	margin-top: 10%;
 	padding: 32px;
 	width: 256px;
 }
@@ -33,7 +33,6 @@ body, html{
 
 .top{
 	border-radius: 3px 3px 0 0;
-	margin-bottom: .04em;
 }
 
 .bottom{
@@ -52,14 +51,16 @@ body, html{
 	text-transform: lowercase;
 	margin-left: 2px;
 	margin-top: 16px;
+	cursor: pointer;
 }
 
 .title{
 	font-size: 3em;
 	width: 256px;
 	color: #ffffff;
-	text-shadow: 1px 1px #141414;
-	padding-bottom: 16px;
+	height: 64px;
+	text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
+	margin-bottom: 16px;
 	font-family: "Shift", Verdana;
 	text-transform: lowercase;
 }
@@ -67,9 +68,30 @@ body, html{
 .foot{
 	position: absolute;
 	width: 100%;
-	height: 10%;
-	min-height: 64px;
+	height: 5%;
+	min-height: 32px;
 	background-color: #000000;
 	border-top: 1px solid #666666;
 	border-radius: 3px;
+	text-align: center;
 }
+
+.f_list{
+	list-style-type: none;
+	margin-right: 5%;
+}
+
+.f_list li{
+	display: inline;
+	padding: 16px;
+}
+
+.f_list li a{
+	color: #efefef;
+	text-decoration: none;
+}
+
+.f_list li a:hover{
+	color: #787878;
+}
+
