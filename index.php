@@ -4,21 +4,21 @@
 		<!-- Bootstrap -->
 		<link rel = "stylesheet" type = "text/stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-		<link rel = "stylesheet type = "text/stylesheet" href = "../css/home.css">
+		<link rel = "stylesheet type = "text/stylesheet" href = "css/home.css">
 		
 		<!-- Google-hosted jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		
-		<script src = "../js/register.js"></script>
+		<script src = "js/home.js"></script>
 	</head>
 	<body>
 		<div class = "jumbotron">
 			<div class = "container">
 				<div class = "f_form">
-					<form autocomplete = "off" action = "home/" onsubmit = "return validateLogin()">
+					<form autocomplete = "off" action = "home/" method = "POST" id = "l_form">
 						<div class = "row row-centered">
 							<div class = "col-md-12">
-								<div class = "title">sign up.</div>
+								<div class = "title">feel it.</div>
 							</div>
 						</div> <!-- row -->
 						<div class = "row row-centered">
@@ -28,22 +28,17 @@
 						</div> <!-- row -->
 						<div class = "row row-centered">
 							<div class = "col-md-12">
-								<input class = "i_home middle" type = "text" id = "i_username" name = "n_" plusername placeholder = "Username">
-							</div>
-						</div> <!-- row -->
-						<div class = "row row-centered">
-							<div class = "col-md-12">
 								<input class = "i_home bottom" type = "password" id = "i_pass" name = "n_pass" placeholder = "Password">
 							</div>
 						</div> <!-- row -->
-						<div class = "row row centered">
+						<div class = "row row-centered">
 							<div class = "col-md-12">
-								<div class = "error_msg"></div>
+								<div class = "error_msg">Your email or password were incorrect.</div>
 							</div>
 						</div> <!-- row -->
 						<div class = "row row-centered">
 							<div class = "col-md-12">
-								<div class = "i_submit">submit</div>
+								<div class = "i_submit">Log In</div>
 							</div>
 						</div> <!-- row -->
 					</form> <!-- form -->
@@ -53,9 +48,9 @@
 		<div class = 'foot'>
 			<ul class = 'f_list'>
 				<li><a href = "#">About</a></li>
-				<li><a href = "../">Sign In</a></li>
-				<li><a href = "#">Register</a></li>
-				<li><a href = "../feels">Anon</a></li>
+				<li><a href = "#">Sign In</a></li>
+				<li><a href = "signup">Register</a></li>
+				<li><a href = "feels">Anon</a></li>
 			</ul>
 		</div> <!-- foot -->
 	</body>

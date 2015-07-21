@@ -99,3 +99,15 @@ body, html{
 	color: #787878;
 }
 
+.error_msg{
+	width: 256px;
+	height: 32px;
+	text-align: center;
+	font-family: "Shift", Verdana;
+	background-color: rgba(0, 0, 0, .5);
+	color: #FFFFFF;
+	font-size: .6em;
+	margin-top: 6%;
+	line-height: 32px;
+	vertical-align: middle;
+}
