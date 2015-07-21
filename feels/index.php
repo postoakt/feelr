@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- Google-hosted jQuery -->
+		<script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		
+		<script src = "../js/feel.js"></script>
 		<link rel = "stylesheet" type = "text/css" href = "../css/feels.css">
 	</head>
 	<body>
@@ -30,12 +34,14 @@
 				<div class = 'u_n'>-Anonymous</div>
 				<ul class = 'c_h'>
 					<li><div class = 'comments'>4,344 comments</div></li>
-					<li><div class = 'heart'><img src = '../imgs/heart.png' width = 8px; height = 8px;></div></li>
+					<li><div class = 'heart'><img src = '../imgs/heart.png' data-other-src = '../imgs/heart-filled.png' width = 8px; height = 8px;></div></li>
 					<li><div class = 'h_c'>(34)</div></li>
 				</ul>
 			</div>";
 		}
 		?>						
 		</div> <!-- wrapper -->
+		<div id = "footer">
+		</div> <!-- footer -->
 	</body>
 </html>

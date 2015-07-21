@@ -1,6 +1,6 @@
 body, html{
 	margin: 0;
-	background-color: #000000;
+	background-color: #666666;
 }
 
 a{
@@ -17,7 +17,6 @@ a:hover{
 	margin: 0 auto;
 	width: 768px;
 	height: 1792px;
-	/*background-color: #303030; */
 	margin-bottom: 64px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
@@ -27,7 +26,6 @@ a:hover{
 	margin: 0 auto;
 	width 768px;
 	height: 64px;
-	background-color: #000000;
 	border-bottom: 1px inset #efefef;
 	color: #efefef;
 }
@@ -56,6 +54,7 @@ a:hover{
 	padding-left: 8px;
 	padding-right: 8px;
 	border-radius: 2px;
+	font-family: "Shift", Verdana;
 	word-wrap: break-word;
 }
 
@@ -67,6 +66,10 @@ a:hover{
 .heart{
 	width: 16px;
 	height: 8px;
+}
+
+.heart img{
+	opacity: .7;
 }
 
 .heart:hover{
