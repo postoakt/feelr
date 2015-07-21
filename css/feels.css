@@ -3,11 +3,21 @@ body, html{
 	background-color: #000000;
 }
 
+a{
+	text-decoration: none;
+	outline: 0;
+	color: #EFEFEF;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
 #wrapper{
 	margin: 0 auto;
 	width: 768px;
-	height: 1024px;
-	background-color: #303030;
+	height: 1792px;
+	/*background-color: #303030; */
 	margin-bottom: 64px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
@@ -30,6 +40,10 @@ body, html{
 	left: 32px;
 }
 
+#header h1 a{
+	text-decoration: none;
+}
+
 .feel{
 	background-color: #efefef;
 	font: "Shift", Verdana;
@@ -42,6 +56,7 @@ body, html{
 	padding-left: 8px;
 	padding-right: 8px;
 	border-radius: 2px;
+	word-wrap: break-word;
 }
 
 .comments{
@@ -83,3 +98,42 @@ body, html{
 	position: relative;
 	right: 12px;
 }
+
+.nav{
+	list-style-type: none;
+	float: right;
+	position: relative;
+	bottom: 64px;
+}
+
+.nav li{
+	display: inline-block;
+}
+
+.nav div{
+	width: 48px;
+	height: 24px;
+	background-color: #39F;
+	color: #efefef;
+	text-align: center;
+	line-height: 24px;
+	vertical-align: middle;
+	font-family: "Shift", Sans-Serif;
+	font-size: .75em;
+	border-radius: 1px;
+}
+
+#sort_menu{
+	list-style-type: none;
+}
+
+#sort_menu li{
+	display: inline;
+	padding: 8px;
+	font-size: .5em;
+}
+
+#sort_menu li a.active{
+	text-decoration: underline;
+}
+
