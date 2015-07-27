@@ -13,35 +13,75 @@
 			<h1><a href = "../">feelr</a></h1>
 			<p>let it all out.</p>
 			<ul class = "nav">
-				<li><a href = "../"><div class = "log_in">log in</div></a></li>
-				<li><a href = "../signup"><div class = "sign_up">sign up</div></a></li>
+		<?php	
+			if (isset($_SESSION['logged_in'])){
+				echo "<li>" . $_SESSION['username'] . " -</li>
+				<li>messages(" . $_SESSION['messages'] . ")</li>
+				<li><a href = '#'>sign out</a></li>";
+			}
+			else {
+				echo "<li><a href = '../'><div class = 'log_in'>log in</div></a></li>
+					  <li><a href = '../signup'><div class = 'sign_up'>sign up</div></a></li>";
+			}
+		?>
 			</ul>
 		</div> <!-- header -->
-		<div id = "sort_menu">
-			<ul>
-				<li><a class = "active" href = "#">Latest</a></li>
-				<li><a href = "#">Popular Today</a></li>
-				<li><a href = "#">Popular This Week</a></li>
-				<li><a href = "#">Random</a></li>
-			</ul>
-		</div> <!-- sort menu -->
+		
 		<?php
+			include "../scripts/functions.php";
+			
+			$m = '';
+			if (isset($_GET['m']))
+				$m = $_GET['m'];
+			else
+				$m = 'latest';
+			
+			echo "<div id = 'sort_menu'>";
+				echo "<ul>";
+					
+					if ($m === 'latest')
+						echo "<li><a class = 'active' href = '#'>Latest</a></li>";
+					else
+						echo "<li><a href = 'index.php?m=latest'>Latest</a></li>";
+					
+					if ($m === 'p_today')
+						echo "<li><a class = 'active' href = 'index.php?m=p_today'>Popular Today</a></li>";
+					else
+						echo "<li><a href = 'index.php?m=p_today'>Popular Today</a></li>";
+					
+					if ($m === 'p_week')
+						echo "<li><a class = 'active' href = 'index.php?m=p_week'>Popular This Week</a></li>";
+					else 
+						echo "<li><a href = 'index.php?m=p_week'>Popular This Week</a></li>";
+					
+					if ($m == 'random')
+						echo "<li><a class = 'active' href = 'index.php?m=random'>Random</a></li>";
+					else
+						echo "<li><a href = 'index.php?m=random'>Random</a></li>";
 		
-		for ($i = 0; $i < 10; $i++){	
-		
-			echo "<div class = 'feel'>
-				<p>afl;jasj;lfkdkjl;asfdjkl;safdjlk;fsajlk;djlk;asfdjkl;asfdjlk;sdafkl;fasdasdfasdfasdfafl;jasj;lfkdkjl;asfdjkl;safdjlk;fsajlk;djlk;asfdjkl;asfdjlk;sdafkl;fasdasdfasdfasdfafl;jasj;lfkdkjl;asfdjkl;safdjlk;fsajlk;djlk;asfdjkl;asfdjlk;sdafkl;fasdasdfasdfasdfafl;jasj;lfkdkjl;asfdjkdfdfdflasdfasdfasdfffffff</p>	
-				<div class = 'u_n'>-Anonymous</div>
-				<ul class = 'c_h'>
-					<li><div class = 'comments'>4,344 comments</div></li>
-					<li><div class = 'heart'><img src = '../imgs/heart.png' data-other-src = '../imgs/heart-filled.png' width = 8px; height = 8px;></div></li>
-					<li><div class = 'h_c'>(34)</div></li>
-				</ul>
-			</div>";
-		}
+				echo "</ul>";
+			echo "</div> <!-- sort menu -->";
+			
+			$p_num = 1;
+			
+			if (isset($_GET['p']))
+				$p_num = $_GET['p'];
+			
+			switch ($m) {
+				case 'latest': get_posts_by_latest($p_num);
+					break;
+				case 'p_today':
+					break;
+				case 'p_week':
+					break;
+				case 'random': get_posts_randomly($p_num);
+							   echo_random_footer();
+					break;
+				default:
+					break;
+			}
+			
 		?>						
-		</div> <!-- wrapper -->
-		<div id = "footer">
-		</div> <!-- footer -->
+
 	</body>
 </html>

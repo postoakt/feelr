@@ -1,13 +1,13 @@
 body, html{
 	margin: 0;
 	/*background-color: #666666; */
-	background-color: #000000;
+	background-color: #EFEFEF;
 }
 
 a{
 	text-decoration: none;
 	outline: 0;
-	color: #EFEFEF;
+	color: #000000;
 }
 
 a:hover{
@@ -27,13 +27,13 @@ a:hover{
 	margin: 0 auto;
 	width 768px;
 	height: 64px;
-	border-bottom: 1px inset #efefef;
-	color: #efefef;
+	border-bottom: 1px inset #000000;;
+	color: #000000;
 }
 
 #header p{
 	font-size: .5em;
-	color: #efefef;
+	color: #000000;
 	position: relative;
 	bottom: 16px;
 	left: 32px;
@@ -41,10 +41,11 @@ a:hover{
 
 #header h1 a{
 	text-decoration: none;
+	color: #000000;
 }
 
 .feel{
-	background-color: #efefef;
+	background-color: #ffffff;
 	font: "Shift", Verdana;
 	font-size: .75em;
 	width: 468px;
@@ -123,12 +124,14 @@ a:hover{
 	line-height: 24px;
 	vertical-align: middle;
 	font-family: "Shift", Sans-Serif;
+	text-shadow: 0 0 #ffffff;
 	font-size: .75em;
 	border-radius: 1px;
 }
 
 #sort_menu{
 	list-style-type: none;
+	color: #000000;
 }
 
 #sort_menu li{
@@ -139,5 +142,14 @@ a:hover{
 
 #sort_menu li a.active{
 	text-decoration: underline;
+}
+
+#footer{
+	color: #ffffff;
+	width: 128px;
+	height: 64px;
+	text-align: center;
+	padding-left: 8px;
+	margin: 32px;
 }
 

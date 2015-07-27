@@ -19,13 +19,36 @@ function main(){
 			$('.error_msg').show();
 			$('.error_msg').html("Password must be at least 6 characters in length.");
 		}
+		else{
+			if (username_in_use(username)){
+				
+			}
+			else if (email_in_use(email)){
+				
+			}
+			else{
+				
+			}
+		}
 		
 	});
 } //main()
+
+function username_in_use(username){
+	
+} //username_in_use(username)
+
+function email_in_use(email){
+	
+} //email_in_use(email)
 
 function validateEmail(email){
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 } //validateEmail(email)
+
+function insert_into_db(email, username, password){
+	
+} //insert_into_db(email, username, password)
 
 $(document).ready(main);
