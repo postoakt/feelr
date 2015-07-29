@@ -15,7 +15,7 @@
 		<div class = "jumbotron">
 			<div class = "container">
 				<div class = "f_form">
-					<form autocomplete = "off" action = "home/" method = "POST" id = "l_form">
+					<form autocomplete = "off" method = "POST" action = 'feels' id = "l_form">
 						<div class = "row row-centered">
 							<div class = "col-md-12">
 								<div class = "title">feel it.</div>

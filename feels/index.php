@@ -13,10 +13,13 @@
 			<h1><a href = "../">feelr</a></h1>
 			<p>let it all out.</p>
 			<ul class = "nav">
-		<?php	
+		<?php
+			session_start();
+			require_once('../scripts/functions.php');
 			if (isset($_SESSION['logged_in'])){
+				$msg_count = get_message_count($_SESSION['username']);
 				echo "<li>" . $_SESSION['username'] . " -</li>
-				<li>messages(" . $_SESSION['messages'] . ")</li>
+				<li>messages(" . $msg_count . ")</li>
 				<li><a href = '#'>sign out</a></li>";
 			}
 			else {
@@ -28,8 +31,8 @@
 		</div> <!-- header -->
 		
 		<?php
-			include "../scripts/functions.php";
-			
+			require_once("../scripts/functions.php");
+	
 			$m = '';
 			if (isset($_GET['m']))
 				$m = $_GET['m'];
@@ -58,7 +61,8 @@
 						echo "<li><a class = 'active' href = 'index.php?m=random'>Random</a></li>";
 					else
 						echo "<li><a href = 'index.php?m=random'>Random</a></li>";
-		
+					
+					echo "<li><a href = '../post'>Post</a></li>";
 				echo "</ul>";
 			echo "</div> <!-- sort menu -->";
 			
@@ -80,7 +84,6 @@
 				default:
 					break;
 			}
-			
 		?>						
 
 	</body>

@@ -1,13 +1,24 @@
 function validateLogin(){
-	var email = document.getElementById("i_email").value;
+	var em = document.getElementById("i_email").value;
 	var pw = document.getElementById("i_pass").value;
-	if (validateEmail(email) && pw.length > 0){
-		
+
+	if (validateEmail(em) && pw.length > 0){
+		$.ajax({
+			url: "scripts/login.php",
+			method: "POST",
+			data: {email: em, password: pw}
+		}).success(function(data){
+			var result = parseInt(data);
+			if (result > 0)
+				location.href = "feels";
+			else
+				$('.error_msg').show();
+		});
 	}
-	else{
-		return false;
-	}
-}
+	else
+		$('.error_msg').show();
+
+} //validateLogin()
 
 
 function validateEmail(email) {
@@ -19,15 +30,8 @@ function validateEmail(email) {
 function main(){
 	
 	$('.error_msg').hide();
-	
 	$('.i_submit').click(function(){
-		if (validateLogin()){
-			document.getElementById("l_form").submit();
-		}
-		else{
-			$('.error_msg').show();
-		}
-
+		validateLogin();
 	});	
 }
 

@@ -60,6 +60,30 @@ a:hover{
 	word-wrap: break-word;
 }
 
+.feel_comment{
+	background-color: #ffffff;
+	font: "Shift", Verdana;
+	font-size: .75em;
+	width: 312px;
+	border: 1px solid #666666;
+	margin: 0 auto;
+	margin: 32px;
+	float: left;
+	text-align: left;
+	padding-left: 8px;
+	padding-right: 8px;
+	border-radius: 2px;
+	font-family: "Shift", Verdana;
+	word-wrap: break-word;
+}
+
+.feel_comment_closing{
+	float: right;
+	color: #8F8F8F;
+	font-size: .8em;
+	
+}
+
 .comments{
 	font-size: .75em;
 	color: #8F8F8F;
@@ -127,6 +151,35 @@ a:hover{
 	text-shadow: 0 0 #ffffff;
 	font-size: .75em;
 	border-radius: 1px;
+}
+
+.post_form{
+	margin: 0 auto;
+	margin-top: 48px;
+	float: left;
+	font-size: .8em;
+}
+
+.post_form_c{
+	margin: 0 auto;
+	margin-top: 48px;
+	float: left;
+	font-size: .8em;
+	margin-left: 38px;	
+}
+
+.post_form_c textarea{
+	height: 64px;
+}
+
+.s_post{
+	float: right;
+}
+
+.p_msg{
+	width: 468px;
+	height: 128px;
+	resize: none;
 }
 
 #sort_menu{

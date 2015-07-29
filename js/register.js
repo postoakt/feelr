@@ -21,13 +21,19 @@ function main(){
 		}
 		else{
 			if (username_in_use(username)){
-				
+				/* TODO
+				 * SHOW ERROR MESSAGE
+				 */
 			}
 			else if (email_in_use(email)){
-				
+				/*TODO
+				 * SHOW ERROR MESSGE
+				 */
 			}
 			else{
-				
+				/* TODO
+				 * STORE CREDENTIALS IN DATABASE, VALIDATE DATABASE INSERT, REDIRECT TO MAIN SITE
+				 */
 			}
 		}
 		
