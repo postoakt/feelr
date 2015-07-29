@@ -5,6 +5,7 @@
 		<script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		
 		<script src = "../js/feel.js"></script>
+		<script src = "../js/logout.js"></script>
 		<link rel = "stylesheet" type = "text/css" href = "../css/feels.css">
 	</head>
 	<body>
@@ -19,8 +20,8 @@
 			if (isset($_SESSION['logged_in'])){
 				$msg_count = get_message_count($_SESSION['username']);
 				echo "<li>" . $_SESSION['username'] . " -</li>
-				<li>messages(" . $msg_count . ")</li>
-				<li><a href = '#'>sign out</a></li>";
+				<li>messages (" . $msg_count . ") - </li>
+				<li><a href = '#' onclick = 'logout()'>sign out</a></li>";
 			}
 			else {
 				echo "<li><a href = '../'><div class = 'log_in'>log in</div></a></li>
@@ -66,13 +67,14 @@
 				echo "</ul>";
 			echo "</div> <!-- sort menu -->";
 			
-			$p_num = 1;
-			
 			if (isset($_GET['p']))
 				$p_num = $_GET['p'];
+			else
+				$p_num = 1;
 			
 			switch ($m) {
 				case 'latest': get_posts_by_latest($p_num);
+							   echo_posts_footer($m, $p_num);
 					break;
 				case 'p_today':
 					break;
@@ -84,7 +86,7 @@
 				default:
 					break;
 			}
-		?>						
-
+		?>
+		</div> <!-- wrapper -->						
 	</body>
 </html>

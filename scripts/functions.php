@@ -4,18 +4,48 @@
 	function insert_post($user, $body){	
 		$mysqli = new mysqli(SERVER, USER, PW, DB);
 		$query = "INSERT INTO posts (user, body) VALUES (?, ?)";
-		$stmt = $mysqli->prepare(query);
+		$stmt = $mysqli->prepare($query);
 		$stmt->bind_param('ss', $user, $body);
 		$stmt->execute();
 		return $stmt->affected_rows;
 	} //insert_post($user, $body)
+	
+	function is_email_in_use($email){
+		$mysqli = new mysqli(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM users WHERE email = ?";
+		$stmt = $mysqli->prepare($query);
+		$stmt->bind_param('s', $email);
+		$stmt->execute();
+		$stmt->store_result();
+		return $stmt->num_rows;
+	} //is_email_in_use($email)
+	
+	function is_username_in_use($username){
+		$mysqli = new mysqli(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM users WHERE username = ?";
+		$stmt = $mysqli->prepare($query);
+		$stmt->bind_param('s', $username);
+		$stmt->execute();
+		$stmt->store_result();
+		return $stmt->num_rows;	 	
+	} //is_username_in_use($username)
 
-	function register_user($username, $email){
-
+	function register_user($username, $email, $password){
+		$mysqli = new mysqli(SERVER, USER, PW, DB);
+		$query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+		$stmt = $mysqli->prepare($query);
+		$stmt->bind_param('sss', $username, $email, $password);
+		$stmt->execute();
+		return $stmt->affected_rows;
 	} //register_user($username, $email)
 
 	function remove_user($username){
-
+		$mysqli = new mysqli(SERVER, USER, DB);
+		$query = "DELETE FROM USERS WHERE username = ?";
+		$stmt = $mysqli->prepare($query);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		return $stmt->affected_rows;
 	} //remove_user($username)
 
 	function get_posts_by_latest($p_num){
@@ -56,6 +86,33 @@
 				</ul>
 			</div>";
 	} //echo_result($result)
+	
+	function echo_posts_footer($m, $p_num){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM posts WHERE 1";
+		$result = mysqli_query($con, $query);
+		$posts_count = mysqli_num_rows($result);
+		$mod = (int)(($posts_count % 10) > 0);
+		$page_count = (int)($posts_count / 10) + $mod;
+		
+		echo "<div id = 'footer'>";
+		if ($p_num != 1){
+			echo f_footer_link($m, $p_num - 1, "Back");
+		}
+		echo f_footer_link($m, '1', '1');
+		if ($p_num != 1){
+			echo f_footer_link($m, $p_num, $p_num);
+		}
+		if ($p_num != $page_count){
+			echo f_footer_link($m, $page_count, $page_count);
+			echo f_footer_link($m, $p_num + 1, "Next");
+		}
+		echo "</div>";
+	} //echo_posts_footer($m, $p_num)
+	
+	function f_footer_link($m, $page_number, $text){
+		return sprintf("<a class = 'f_link' href = 'index.php?m=%s&p=%s'>%s</a>", $m, $page_number, $text);
+	}
 	
 	function echo_random_footer(){
 			echo "<div id = 'footer'>";

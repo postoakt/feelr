@@ -14,6 +14,7 @@
 
 		<!-- Javascript -->
 		<script src = "../js/feel.js"></script>
+		<script src = "../js/logout.js"></script>
 		<script>
 			function validate_form(){
 				var googleResponse = jQuery('#g-recaptcha-response').val();
@@ -52,8 +53,8 @@
 						if (isset($_SESSION['logged_in'])){
 							$msg_count = get_message_count($_SESSION['username']);
 							echo "<li>" . $_SESSION['username'] . " -</li>
-							<li>messages(" . $msg_count . ")</li>
-							<li><a href = '#'>sign out</a></li>";
+							<li>messages (" . $msg_count . ") -</li>
+							<li><a href = '#' onclick = 'logout()'>sign out</a></li>";
 						}
 						else {
 							echo "<li><a href = '../'><div class = 'log_in'>log in</div></a></li>

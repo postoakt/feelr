@@ -132,7 +132,9 @@ a:hover{
 	list-style-type: none;
 	float: right;
 	position: relative;
-	bottom: 64px;
+	bottom: 52px;
+	font-size: .7em;
+	font-family: "Shift", Sans-serif;
 }
 
 .nav li{
@@ -204,5 +206,11 @@ a:hover{
 	text-align: center;
 	padding-left: 8px;
 	margin: 32px;
+}
+
+.f_link{
+	padding-left: 8px;
+	padding-right: 8px;
+	color: #39f;
 }
 

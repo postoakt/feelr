@@ -2,59 +2,66 @@ function main(){
 	
 	$('.error_msg').hide();
 	
-	$('.i_submit').click(function (){
-		var email = document.getElementById('i_email').value;
-		var username = document.getElementById('i_username').value;
-		var password = document.getElementById('i_pass').value;
+	$('.i_submit').click(function(){
+		var em = document.getElementById('i_email').value;
+		var uname = document.getElementById('i_username').value;
+		var pw = document.getElementById('i_pass1').value;
+		var pw2 = document.getElementById('i_pass2').value;
 		
-		if (!validateEmail(email)){
+		if (!validateEmail(em)){
 			$('.error_msg').show();
 			$('.error_msg').html("Your email address is invalid.");
 		}
-		else if (username.length < 6){
+		else if (uname.length < 6){
 			$('.error_msg').show();
 			$('.error_msg').html("Username must be at least 6 characters in length.");
 		}
-		else if (password.length < 6){
+		else if (pw.length < 6){
 			$('.error_msg').show();
 			$('.error_msg').html("Password must be at least 6 characters in length.");
 		}
-		else{
-			if (username_in_use(username)){
-				/* TODO
-				 * SHOW ERROR MESSAGE
-				 */
-			}
-			else if (email_in_use(email)){
-				/*TODO
-				 * SHOW ERROR MESSGE
-				 */
-			}
-			else{
-				/* TODO
-				 * STORE CREDENTIALS IN DATABASE, VALIDATE DATABASE INSERT, REDIRECT TO MAIN SITE
-				 */
-			}
+		else if (pw !== pw2){
+			$('.error_msg').show();
+			$('.error_msg').html("Passwords do not match.");			
 		}
-		
-	});
+		else{	
+				$.ajax({
+					url: "../scripts/register.php",
+					method: "POST",
+					data: {email: em, username: uname, password: pw}
+				}).done(function(data){
+					if (data === "EMAIL"){
+						$('.error_msg').show();
+						$('.error_msg').html("Email address already in use.");
+					}
+					else if (data === "USERNAME"){
+						$('.error_msg').show();
+						$('.error_msg').html("That username is taken.");	
+					}
+					else if (data === "SQL"){
+						$('.error_msg').show();
+						$('.error_msg').html("There was an error processing your request.");		
+					}
+					else
+						$.ajax({
+							url: "../scripts/login.php",
+							method: "POST",
+							data: {email: em, password: pw}
+						}).done(function(result){
+							if (result > 0)
+								location.href = "../feels";
+							else
+								location.reload();
+						});	//$.ajax -- login user
+				}); //$.ajax -- register user --
+		}	
+	});// $('.i_submit').click()
 } //main()
-
-function username_in_use(username){
-	
-} //username_in_use(username)
-
-function email_in_use(email){
-	
-} //email_in_use(email)
 
 function validateEmail(email){
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 } //validateEmail(email)
 
-function insert_into_db(email, username, password){
-	
-} //insert_into_db(email, username, password)
 
 $(document).ready(main);

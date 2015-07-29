@@ -8,6 +8,7 @@
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		
 		<script src = "../js/feel.js"></script>
+		<script src = "../js/logout.js"></script>
 		
 		<link rel = "stylesheet" type = "text/css" href = "../css/feels.css">
 		<link rel = "stylesheet" type = "text/css" href = "../css/feels.css">
@@ -37,8 +38,8 @@
 						if (isset($_SESSION['logged_in'])){
 							$msg_count = get_message_count($_SESSION['username']);
 							echo "<li>" . $_SESSION['username'] . " -</li>
-							<li>messages(" . $msg_count . ")</li>
-							<li><a href = '#'>sign out</a></li>";
+							<li>messages (" . $msg_count . ") - </li>
+							<li><a href = '#' onclick = 'logout()'>sign out</a></li>";
 						}
 						else {
 							echo "<li><a href = '../'><div class = 'log_in'>log in</div></a></li>
