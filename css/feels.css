@@ -12,6 +12,7 @@ a{
 
 a:hover{
 	text-decoration: underline;
+	color: #efefef;
 }
 
 #wrapper{
@@ -135,6 +136,7 @@ a:hover{
 	bottom: 52px;
 	font-size: .7em;
 	font-family: "Shift", Sans-serif;
+	margin-right: 16px;
 }
 
 .nav li{
@@ -150,8 +152,6 @@ a:hover{
 	line-height: 24px;
 	vertical-align: middle;
 	font-family: "Shift", Sans-Serif;
-	text-shadow: 0 0 #ffffff;
-	font-size: .75em;
 	border-radius: 1px;
 }
 
@@ -206,6 +206,7 @@ a:hover{
 	text-align: center;
 	padding-left: 8px;
 	margin: 32px;
+	padding-bottom: 64px;
 }
 
 .f_link{

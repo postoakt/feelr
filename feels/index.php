@@ -43,8 +43,10 @@
 			echo "<div id = 'sort_menu'>";
 				echo "<ul>";
 					
-					if ($m === 'latest')
-						echo "<li><a class = 'active' href = '#'>Latest</a></li>";
+					if ($m === 'latest' || !(($m === 'p_today') || ($m === 'p_week') || ($m === 'random'))){
+						$m = 'latest';
+						echo "<li><a class = 'active' href = 'index.php?m=latest'>Latest</a></li>";
+					}
 					else
 						echo "<li><a href = 'index.php?m=latest'>Latest</a></li>";
 					
@@ -58,7 +60,7 @@
 					else 
 						echo "<li><a href = 'index.php?m=p_week'>Popular This Week</a></li>";
 					
-					if ($m == 'random')
+					if ($m === 'random')
 						echo "<li><a class = 'active' href = 'index.php?m=random'>Random</a></li>";
 					else
 						echo "<li><a href = 'index.php?m=random'>Random</a></li>";
@@ -72,6 +74,9 @@
 			else
 				$p_num = 1;
 			
+			if ((filter_var($p_num, FILTER_VALIDATE_INT) === false) || ($p_num > get_page_count()))
+				$p_num = 1;
+			
 			switch ($m) {
 				case 'latest': get_posts_by_latest($p_num);
 							   echo_posts_footer($m, $p_num);
@@ -80,7 +85,7 @@
 					break;
 				case 'p_week':
 					break;
-				case 'random': get_posts_randomly($p_num);
+				case 'random': get_posts_randomly();
 							   echo_random_footer();
 					break;
 				default:

@@ -51,8 +51,9 @@
 	function get_posts_by_latest($p_num){
 		$e_index = $p_num * 10;
 		$s_index = $e_index - 10;
+
 		$con = mysqli_connect(SERVER, USER, PW, DB);
-		$query = "SELECT * FROM `posts` ORDER BY date DESC LIMIT " . (int)$s_index . ", " . (int)$e_index;
+		$query = "SELECT * FROM `posts` ORDER BY PID DESC LIMIT " . (int)$s_index . ", 10";
 		$result = mysqli_query($con, $query);
 		echo_result($result);
 	} //get_posts_by_latest()
@@ -65,11 +66,9 @@
 
 	} //get_popular_posts_today()
 
-	function get_posts_randomly($p_num){
-		$e_index = $p_num * 10;
-		$s_index = $e_index - 10;
+	function get_posts_randomly(){
 		$con = mysqli_connect(SERVER, USER, PW, DB);
-		$query = "SELECT * FROM `posts` ORDER BY RAND() DESC LIMIT " . (int)$s_index . ", " . (int)$e_index;
+		$query = "SELECT * FROM `posts` ORDER BY RAND() DESC LIMIT 0, 10";
 		$result = mysqli_query($con, $query);
 		echo_result($result);
 	} //get_posts_randomly()
@@ -88,16 +87,10 @@
 	} //echo_result($result)
 	
 	function echo_posts_footer($m, $p_num){
-		$con = mysqli_connect(SERVER, USER, PW, DB);
-		$query = "SELECT * FROM posts WHERE 1";
-		$result = mysqli_query($con, $query);
-		$posts_count = mysqli_num_rows($result);
-		$mod = (int)(($posts_count % 10) > 0);
-		$page_count = (int)($posts_count / 10) + $mod;
-		
+		$page_count = get_page_count();
 		echo "<div id = 'footer'>";
 		if ($p_num != 1){
-			echo f_footer_link($m, $p_num - 1, "Back");
+			echo f_footer_link($m, $p_num - 1, "back");
 		}
 		echo f_footer_link($m, '1', '1');
 		if ($p_num != 1){
@@ -105,10 +98,19 @@
 		}
 		if ($p_num != $page_count){
 			echo f_footer_link($m, $page_count, $page_count);
-			echo f_footer_link($m, $p_num + 1, "Next");
+			echo f_footer_link($m, $p_num + 1, "next");
 		}
 		echo "</div>";
 	} //echo_posts_footer($m, $p_num)
+	
+	function get_page_count(){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM posts WHERE 1";
+		$result = mysqli_query($con, $query);
+		$posts_count = mysqli_num_rows($result);
+		$mod = (int)(($posts_count % 10) > 0);
+		return (int)($posts_count / 10) + $mod;	
+	} //get_posts_count()
 	
 	function f_footer_link($m, $page_number, $text){
 		return sprintf("<a class = 'f_link' href = 'index.php?m=%s&p=%s'>%s</a>", $m, $page_number, $text);
