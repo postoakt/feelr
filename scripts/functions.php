@@ -85,14 +85,9 @@
 	function get_popular_all_time($p_num){
 		$con = mysqli_connect(SERVER, USER, PW, DB);
 		$s_index = ($p_num * 10) - 10;
-		$count = 0;
-		$i = 1;
-		while ($count < 1){
-			$query = "SELECT * FROM posts ORDER BY comments + hearts DESC LIMIT " . $p_num . ", 10";
+
+			$query = "SELECT * FROM posts ORDER BY comments + hearts DESC LIMIT " . $s_index . ", 10";
 			$result = mysqli_query($con, $query);
-			$count = mysqli_num_rows($result);			
-			$i++;
-		}
 		echo_result($result);		
 	}
 
@@ -109,7 +104,7 @@
 				<p>" . $row['body'] . "</p>
 				<div class = 'u_n'>-" . $row['user'] ."</div>
 				<ul class = 'c_h'>
-					<li><a href = '../comments/?p=" . $row['PID'] . "'><div class = 'comments'>" . $row['comments'] . " comments</div></a></li>
+					<li><a href = '../comments/?p=" . $row['PID'] . "&i=1'><div class = 'comments'>" . $row['comments'] . " comments</div></a></li>
 					<li><div class = 'heart'><img changed = 'false' val = '" . $row['hearts'] . "' src = '../imgs/heart.png' id = '" . $row['PID'] . "' data-other-src = '../imgs/heart-filled.png' width = 8px; height = 8px;></div></li>
 					<li><div class = 'h_c' id = 'h_" . $row['PID'] . "'>(" . $row['hearts'] . 	")</div></li>
 				</ul>
@@ -160,6 +155,22 @@
 		echo "</div>";
 	} //echo_posts_footer($m, $p_num)
 	
+	function echo_comments_footer($pid, $p_num){
+		echo "<div id = 'footer'>";
+		if ($p_num > 1)
+			echo c_footer_link($pid, $p_num - 1, '<<');
+		echo "<a class = 'f_link' style = 'color: #000000; text-decoration: none;'>" . $p_num . "</a>";
+		$page_count = get_comments_page_count($pid);
+		if ($page_count > 1 && $p_num < $page_count){
+			echo "...";
+			echo c_footer_link($pid, $page_count, $page_count);
+			if ($p_num < $page_count){
+				echo c_footer_link($pid, $p_num + 1, '>>');
+			}
+		}
+		echo "</div>";
+	}
+	
 	function get_page_count(){
 		$con = mysqli_connect(SERVER, USER, PW, DB);
 		$query = "SELECT * FROM posts WHERE 1";
@@ -169,9 +180,26 @@
 		return (int)($posts_count / 10) + $mod;	
 	} //get_posts_count()
 	
+	function get_comments_page_count($pid){
+		$c_count = get_comment_count($pid);
+		$mod = (int)(($c_count % 10) > 0);
+		return (int)($c_count / 10) + $mod;
+	} //get_comments_count()
+	
+	function get_comment_count($pid){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM comments WHERE PID = " . $pid;
+		$result = mysqli_query($con, $query);
+		return mysqli_num_rows($result);	
+	} //get_comment_count($pid)
+	
 	function f_footer_link($m, $page_number, $text){
 		return sprintf("<a class = 'f_link' href = 'index.php?m=%s&p=%s'>%s</a>", $m, $page_number, $text);
-	}
+	} //f_footer_link($m, $page_number, $text)
+	
+	function c_footer_link($p, $i, $text){
+		return sprintf("<a class = 'f_link' href = 'index.php?p=%s&i=%s'>%s</a>", $p, $i, $text);
+	} //f_footer_link($p, $i, $text)
 	
 	function echo_random_footer(){
 			echo "<div id = 'footer'>";
@@ -201,9 +229,10 @@
 			die();
 	} //echo_post_by_pid($pid)
 	
-	function echo_comments_by_pid($pid){
+	function echo_comments_by_pid($pid, $p_num){
 		$con = mysqli_connect(SERVER, USER, PW, DB);
-		$query = "SELECT * FROM comments WHERE PID = " . (int)$pid . " ORDER BY date ASC";
+		$s_index = ($p_num * 10) - 10;
+		$query = "SELECT * FROM comments WHERE PID = " . (int)$pid . " ORDER BY date ASC LIMIT " . $s_index . ", 10";
 		$result = mysqli_query($con, $query);
 		while ($row = mysqli_fetch_assoc($result)){
 			echo "<div class = 'feel_comment'><p>" . $row['body'] . "</p></br><div class = 'feel_comment_closing'> -" . $row['user'] . ", " . $row['date'] . "</div></div>";

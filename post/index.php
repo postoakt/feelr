@@ -53,6 +53,7 @@
 					<li><a href = '../feels/index.php?m=latest'>Latest</a></li>
 					<li><a href = '../feels/index.php?m=p_today'>Popular Today</a></li>
 					<li><a href = '../feels/index.php?m=p_week'>Popular This Week</a></li>
+					<li><a href = '../feels/index.php?m=all_time'>Popular All Time</a></li>
 					<li><a href = '../feels/index.php?m=random'>Random</a></li>
 					<li><a class = 'active' href = '#'>Post</a></li>
 				</ul>

@@ -10,7 +10,6 @@
 
 		<!-- Stylesheets -->
 		<link rel = "stylesheet" type = "text/css" href = "../css/feels.css">
-		<link rel = "stylesheet" type = "text/css" href = "../css/feels.css">
 
 		<!-- Javascript -->
 		<script src = "../js/feel.js"></script>
@@ -22,10 +21,8 @@
 				var msg_body = document.getElementById('f_body').value;
 				var p_id = $('.feel').attr('pid');
 
-				$('.s_post').attr('disabled', 'true');
-
 				if ((msg_body.length > 0) && googleResponse.length > 0) {
-
+					$('.s_post').attr('disabled', 'true');
 					$.ajax({
 						url: "../scripts/insert_comment.php",
 						method: "POST",
@@ -68,16 +65,31 @@
 					<li><a href = '../feels/index.php?m=latest'>Latest</a></li>
 					<li><a href = '../feels/index.php?m=p_today'>Popular Today</a></li>
 					<li><a href = '../feels/index.php?m=p_week'>Popular This Week</a></li>
+					<li><a href = '../feels/index.php?m=all_time'>Popular All Time</a></li>
 					<li><a href = '../feels/index.php?m=random'>Random</a></li>
 					<li><a  href = '../Post/'>Post</a></li>
 				</ul>
 			</div> <!-- sort menu -->
 			<?php
 				require_once("../scripts/functions.php");
-
-				$p = $_GET['p'];
+				$p;
+				$i;
+				if (isset($_GET['p']))
+					$p = $_GET['p'];
+				else
+					$p = 0;
+				if(isset($_GET['i']))
+					$i = $_GET['i'];
+				else
+					$i = 1;
+				
+				if ((filter_var($p, FILTER_VALIDATE_INT) === false) || ($i > get_comments_page_count($p)) || (filter_var($i, FILTER_VALIDATE_INT) === false) ){
+					$p = 0;
+					$i = 1;
+				}
 				echo_post_by_pid($p);
-				echo_comments_by_pid($p);
+				echo_comments_by_pid($p, $i);
+				echo_comments_footer($p, $i);
 			?>
 
 			<form action = '#' onsubmit = 'return validate_form()' autocomplete = 'off'>
