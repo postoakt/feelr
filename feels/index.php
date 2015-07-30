@@ -43,7 +43,7 @@
 			echo "<div id = 'sort_menu'>";
 				echo "<ul>";
 					
-					if ($m === 'latest' || !(($m === 'p_today') || ($m === 'p_week') || ($m === 'random'))){
+					if ($m === 'latest' || !(($m === 'p_today') || ($m === 'p_week') || ($m === 'random') || ($m === 'all_time'))){
 						$m = 'latest';
 						echo "<li><a class = 'active' href = 'index.php?m=latest'>Latest</a></li>";
 					}
@@ -59,12 +59,17 @@
 						echo "<li><a class = 'active' href = 'index.php?m=p_week'>Popular This Week</a></li>";
 					else 
 						echo "<li><a href = 'index.php?m=p_week'>Popular This Week</a></li>";
-					
+						
+					if ($m === 'all_time')
+						echo "<li><a class = 'active' href = 'index.php?m=all_time'>Popular All Time</a></li>";
+					else
+						echo "<li><a href = 'index.php?m=all_time'>Popular All Time</a></li>";
+											
 					if ($m === 'random')
 						echo "<li><a class = 'active' href = 'index.php?m=random'>Random</a></li>";
 					else
 						echo "<li><a href = 'index.php?m=random'>Random</a></li>";
-					
+						
 					echo "<li><a href = '../post'>Post</a></li>";
 				echo "</ul>";
 			echo "</div> <!-- sort menu -->";
@@ -81,9 +86,12 @@
 				case 'latest': get_posts_by_latest($p_num);
 							   echo_posts_footer($m, $p_num);
 					break;
-				case 'p_today':
+				case 'p_today': get_popular_posts_today();
 					break;
-				case 'p_week':
+				case 'p_week': get_popular_posts_this_week();
+					break;
+				case 'all_time': get_popular_all_time($p_num);
+								 echo_posts_footer($m, $p_num);
 					break;
 				case 'random': get_posts_randomly();
 							   echo_random_footer();

@@ -65,7 +65,7 @@
 			else
 				echo "<div style = 
 				' text-align: center; color: #8F0000; font-size: 2em;
-				 margin: 0 auto; margin-top: 32px; padding: 32px; font-family: Sans-Serif;'>
+				 margin: 0 auto; margin-top: 64px; padding: 32px; font-family: Sans-Serif;'>
 				 There was an error processing your request.</div>";		
 		?>
 	</body>

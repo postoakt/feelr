@@ -49,22 +49,52 @@
 	} //remove_user($username)
 
 	function get_posts_by_latest($p_num){
-		$e_index = $p_num * 10;
-		$s_index = $e_index - 10;
-
+		$s_index = ($p_num * 10) - 10;
 		$con = mysqli_connect(SERVER, USER, PW, DB);
 		$query = "SELECT * FROM `posts` ORDER BY PID DESC LIMIT " . (int)$s_index . ", 10";
 		$result = mysqli_query($con, $query);
 		echo_result($result);
 	} //get_posts_by_latest()
 
-	function get_popular_posts_this_week($p_num){
-
+	function get_popular_posts_this_week(){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$count = 0;
+		$i = 1;
+		while ($count < 1){
+			$query = "SELECT * FROM posts WHERE date > DATE_SUB(NOW(), INTERVAL " . $i . " WEEK) ORDER BY comments + hearts DESC LIMIT 0, 10";
+			$result = mysqli_query($con, $query);
+			$count = mysqli_num_rows($result);			
+			$i++;
+		}
+		echo_result($result);
 	} //get_popular_posts_this_week()
 
-	function get_popular_posts_today($p_num){
-
+	function get_popular_posts_today(){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$count = 0;
+		$i = 1;
+		while ($count < 1){
+			$query = "SELECT * FROM posts WHERE date > DATE_SUB(NOW(), INTERVAL " . $i . " DAY) ORDER BY comments + hearts DESC LIMIT 0, 10";
+			$result = mysqli_query($con, $query);
+			$count = mysqli_num_rows($result);			
+			$i++;
+		}
+		echo_result($result);
 	} //get_popular_posts_today()
+	
+	function get_popular_all_time($p_num){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$s_index = ($p_num * 10) - 10;
+		$count = 0;
+		$i = 1;
+		while ($count < 1){
+			$query = "SELECT * FROM posts ORDER BY comments + hearts DESC LIMIT " . $p_num . ", 10";
+			$result = mysqli_query($con, $query);
+			$count = mysqli_num_rows($result);			
+			$i++;
+		}
+		echo_result($result);		
+	}
 
 	function get_posts_randomly(){
 		$con = mysqli_connect(SERVER, USER, PW, DB);
@@ -89,16 +119,43 @@
 	function echo_posts_footer($m, $p_num){
 		$page_count = get_page_count();
 		echo "<div id = 'footer'>";
-		if ($p_num != 1){
-			echo f_footer_link($m, $p_num - 1, "back");
-		}
-		echo f_footer_link($m, '1', '1');
-		if ($p_num != 1){
-			echo f_footer_link($m, $p_num, $p_num);
-		}
-		if ($p_num != $page_count){
+		
+		if($p_num < 4){
+			for ($i = 1; $i <= 3; $i++){
+				if ($i == $p_num)
+					echo "<a class = 'f_link' style = 'color: #000000; text-decoration: none;'>" . $p_num . "</a>";
+				else
+					echo f_footer_link($m, $i, $i);
+			}
+			echo "...";
 			echo f_footer_link($m, $page_count, $page_count);
-			echo f_footer_link($m, $p_num + 1, "next");
+			echo f_footer_link($m, $p_num + 1, ">>");
+		}
+		else if($p_num >= 3 && $p_num < ($page_count - 2)){
+			echo f_footer_link($m, $p_num - 1, "<<");
+			echo f_footer_link($m, 1, 1);
+			echo "...";
+			for ($i = $p_num - 1; $i <= $p_num + 1; $i++){
+				if ($i == $p_num)
+					echo "<a class = 'f_link' style = 'color: #000000; text-decoration: none;'>" . $p_num . "</a>";
+				else
+					echo f_footer_link($m, $i, $i);
+			}
+			echo "...";
+			echo f_footer_link($m, $page_count, $page_count);
+			echo f_footer_link($m, $p_num + 1, ">>");			
+		}
+		else{
+			echo f_footer_link($m, $p_num - 1, "<<");
+			echo f_footer_link($m, 1, 1);
+			echo "...";
+			for ($i = $page_count - 2.; $i <= $page_count; $i++){
+				if ($i == $p_num)
+					echo "<a class = 'f_link' style = 'color: #000000; text-decoration: none;'>" . $p_num . "</a>";
+				else
+					echo f_footer_link($m, $i, $i);
+			}	
+			echo f_footer_link($m, $p_num + 1, ">>");		
 		}
 		echo "</div>";
 	} //echo_posts_footer($m, $p_num)
