@@ -1,0 +1,66 @@
+#wrapper{
+	height: 100%;
+}
+#m_body{
+	background-color: white;
+	width: 768px;
+	height: 512px;
+	margin: 0 auto;
+	padding: 0;
+	border: 1px solid #000000;
+	overflow: scroll;
+}
+
+table{
+	border-collapse: collapse;
+	font-size: 1.2em;
+	text-align: center;
+	margin-top: 16px;
+}
+
+.t-hover{
+	width: inherit;
+	font-family: "Shift", Sans-Serif;
+}
+
+.t-hover thead{
+	border-bottom: 1px solid #000000;
+}
+
+.t_foot{
+	width: 100%;
+	text-align: center;
+	padding-top: 60%;
+}
+
+.t-hover td{
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.t-hover tbody tr:hover{
+	background-color: #efefef;
+}
+
+.m_menu{
+	list-style-type: none;
+	margin: 0;
+	margin-top: 32px;
+}
+
+.m_menu li{
+	display: inline;
+	height: 64px;
+	width: 128px;
+	font-family: "Shift", Sans-Serif;
+	padding: 8px;
+}
+
+.m_menu .active{
+	background-color: #ffffff;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-left: 1px solid #efefef;
+	border-right: 1px solid #efefef;
+	border-top: 1px solid #efefef;
+}

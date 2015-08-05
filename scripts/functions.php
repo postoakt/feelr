@@ -10,6 +10,10 @@
 		return $stmt->affected_rows;
 	} //insert_post($user, $body)
 	
+	function send_message($to, $from, $subj, $body){
+		
+	} //send_message($to, $from, $subj, $body)
+	
 	function is_email_in_use($email){
 		$mysqli = new mysqli(SERVER, USER, PW, DB);
 		$query = "SELECT * FROM users WHERE email = ?";
@@ -255,4 +259,53 @@
 		$result = mysqli_query($con, $query);
 		return mysqli_num_rows($result);		
 	}
+	
+	function echo_inbox($user){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM messages WHERE recipient = '" . $user . "' ORDER BY date ASC";
+		$result = mysqli_query($con, $query);
+		$len = mysqli_num_rows($result);
+
+		if ($len > 0){
+			echo "<table class='t-hover'>";
+			echo "<thead><tr><td>From</td><td>Subject</td><td>Message</td><td>Date</td></tr></thead>";
+			while ($row = mysqli_fetch_assoc($result)){
+				$body = $row['body'];
+				if (strlen($body) > 10){
+					$body = substr($body, 0, 10) . "...";
+				}
+				echo "<tr><td>" . $row['sender'] . "</td><td>" . $row['subj'] . "</td><td>" . $body . "</td><td>" . date('M j Y g:i A', strtotime($row['date'])) . "</td></tr>";
+				echo "</table>";		
+			}
+		}
+		else{
+			echo "<div style = 'margin: 0 auto; margin-top: 64px; text-align: center; font-family: 'Shift', Sans-Serif;'>No messages to display. </div>";
+		}
+	} //echo_inbox($user)
+	
+	function echo_sentbox($user){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM messages WHERE sender = '" . $user . "' ORDER BY date ASC";
+		$result = mysqli_query($con, $query);
+		$len = mysqli_num_rows($result);
+
+		if ($len > 0){
+			echo "<table class='t-hover'>";
+			echo "<thead><tr><td>From</td><td>Subject</td><td>Message</td><td>Date</td></tr></thead>";
+			while ($row = mysqli_fetch_assoc($result)){
+				$body = $row['body'];
+				if (strlen($body) > 10){
+					$body = substr($body, 0, 10) . "...";
+				}
+				echo "<tr><td>" . $row['sender'] . "</td><td>" . $row['subj'] . "</td><td>" . $body . "</td><td>" . date('M j Y g:i A', strtotime($row['date'])) . "</td></tr>";
+				echo "</table>";		
+			}
+		}
+		else{
+			echo "<div style = 'margin: 0 auto; margin-top: 64px; text-align: center; font-family: 'Shift', Sans-Serif;'>No messages to display. </div>";
+		}	
+	} //echo_sentbox($user)
+	
+	function compose_msg($user){
+	} //compose_msg($user)
 ?>
