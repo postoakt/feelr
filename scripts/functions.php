@@ -157,10 +157,13 @@
 	
 	function echo_comments_footer($pid, $p_num){
 		echo "<div id = 'footer'>";
-		if ($p_num > 1)
+		if ($p_num > 1){
 			echo c_footer_link($pid, $p_num - 1, '<<');
-		echo "<a class = 'f_link' style = 'color: #000000; text-decoration: none;'>" . $p_num . "</a>";
+			echo "<a class = 'f_link' style = 'color: #000000; text-decoration: none;'>" . $p_num . "</a>";
+		}
 		$page_count = get_comments_page_count($pid);
+		if ($p_num == 1 && $page_count > 1)
+			echo "<a class = 'f_link' style = 'color: #000000; text-decoration: none;'>" . $p_num . "</a>";
 		if ($page_count > 1 && $p_num < $page_count){
 			echo "...";
 			echo c_footer_link($pid, $page_count, $page_count);

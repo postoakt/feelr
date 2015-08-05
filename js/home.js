@@ -29,10 +29,31 @@ function validateEmail(email) {
 
 function main(){
 	
+	var toggle = true;
 	$('.error_msg').hide();
+	$('.b_quote').hide();
 	$('.i_submit').click(function(){
 		validateLogin();
-	});	
+	});
+	
+	$('#expand').click(function(){
+		if (toggle){
+			$('.about').animate({ height: '256px'}, 300,
+			function(){
+				toggle = false;
+				$('.b_quote').show();
+			});
+			$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+		}
+		else{
+			$('.about').animate({ height: '0'}, 300,
+		    function(){
+		    	toggle = true;
+		    	$('.b_quote').hide();
+		    });
+			$("html, body").animate({ scrollTop: 0}, "slow");
+		}
+	});
 }
 
 $(document).ready(main);

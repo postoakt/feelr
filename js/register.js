@@ -1,7 +1,8 @@
 function main(){
 	
 	$('.error_msg').hide();
-	
+	$('.reg_success').hide();
+
 	$('.i_submit').click(function(){
 		var em = document.getElementById('i_email').value;
 		var uname = document.getElementById('i_username').value;
@@ -48,10 +49,13 @@ function main(){
 							method: "POST",
 							data: {email: em, password: pw}
 						}).done(function(result){
-							if (result > 0)
-								location.href = "../feels";
+							if (result > 0){
+								$('.row.row-centered').hide();
+								$('.error_msg').hide();
+								$('.reg_success').show();
+							}
 							else
-								location.reload();
+								$('error_msg').html("There was an error processing your request.");
 						});	//$.ajax -- login user
 				}); //$.ajax -- register user --
 		}	

@@ -83,7 +83,7 @@
 				else
 					$i = 1;
 				
-				if ((filter_var($p, FILTER_VALIDATE_INT) === false) || ($i > get_comments_page_count($p)) || (filter_var($i, FILTER_VALIDATE_INT) === false) ){
+				if ((filter_var($p, FILTER_VALIDATE_INT) === false) || (filter_var($i, FILTER_VALIDATE_INT) === false) ){
 					$p = 0;
 					$i = 1;
 				}
@@ -103,7 +103,7 @@
 					?>
 					</td></tr>
 					<tr><td colspan = '2'><textarea id = 'f_body' name = 'body' class = 'p_msg'></textarea></td></tr>
-					<tr><td>Prove that you are human:</td><td><div style = 'float:right;' class="g-recaptcha" data-sitekey="6Le4cAoTAAAAANLxGDjlWu1j89FOS4WVLYp_OEjY"></div></td></tr>
+					<tr><td>Prove that you are human:</td><td><div style = 'float:right;' class="g-recaptcha" data-sitekey="6LcplwoTAAAAADHuYr9GlOszT-Qx_y0g_WhlAxO9"></div></td></tr>
 					<tr><td></td><td><input class = 's_post' type = 'submit' value = 'submit'></td></tr>
 					</table>
 			</form>

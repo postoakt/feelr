@@ -11,7 +11,7 @@
 	<body>
 		<div id = "wrapper">
 		<div id = "header">
-			<h1><a href = "../">feelr</a></h1>
+			<h1><a href = "../">feel it</a></h1>
 			<p>let it all out.</p>
 			<ul class = "nav">
 		<?php
@@ -84,19 +84,20 @@
 			
 			switch ($m) {
 				case 'latest': get_posts_by_latest($p_num);
-							   echo_posts_footer($m, $p_num);
+					       echo_posts_footer($m, $p_num );
 					break;
 				case 'p_today': get_popular_posts_today();
 					break;
 				case 'p_week': get_popular_posts_this_week();
 					break;
 				case 'all_time': get_popular_all_time($p_num);
-								 echo_posts_footer($m, $p_num);
+					         echo_posts_footer($m, $p_num);
 					break;
 				case 'random': get_posts_randomly();
 							   echo_random_footer();
 					break;
-				default:
+				default:      get_posts_by_latest($p_num);
+                                              echo_posts_footer($m, $p_num);
 					break;
 			}
 		?>

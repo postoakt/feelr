@@ -80,6 +80,30 @@ body, html{
 	text-align: center;
 }
 
+.about{
+	background-color: #000000;
+	height: 0;
+	width: 100%;
+	color: #ffffff;
+	text-align: center;
+	font-style: "Shift", Sans-Serif;
+	margin: 0 auto;
+}
+
+.b_quote{
+	margin: 0 auto;
+	margin-top: 128px;
+	font-size: 1em;
+	font-family: "Shift", Verdana;
+	width: 512px;
+	height: 256px;
+	text-align: left;
+}
+
+.sig{
+	float: left;
+}
+
 .f_list{
 	list-style-type: none;
 	margin-right: 5%;
@@ -97,6 +121,30 @@ body, html{
 
 .f_list li a:hover{
 	color: #787878;
+}
+
+.reg_success{
+	width: 512px;
+	height: 64px;
+	text-align: center;
+	font-family: "Shift", Verdana;
+	background-color: rgba(0, 0, 0, .5);
+	color: #FFFFFF;
+	font-size: 1em;
+	margin-top: 224px;	
+	line-height: 64px;
+	vertical-align: middle;
+	margin: 0 auto;	
+	margin-top: 256px;
+}
+
+.reg_success a{
+	color: #3399FF;
+	text-decoration: none;
+}
+
+.reg_success a:hover{
+	text-decoration: underline;
 }
 
 .error_msg{
