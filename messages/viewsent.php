@@ -43,10 +43,10 @@
 					$mid = $_POST['mid'];
 					$msg = retrieve_message_by_id($mid);
 					echo "<table>";
-						echo "<tr><td style = 'float: left;'>From:</td><td>" . $msg[0] . "</td></tr>";
+						echo "<tr><td style = 'float: left;'>To:</td><td>" . $msg[0] . "</td></tr>";
 						echo "<tr><td style = 'float: left;'>Subject:</td><td>" . $msg[1] . "</td></tr>";
 						echo "<tr><td colspan = '2'><div class = 'v_msg'>" . $msg[2] . "</div></td></tr>";
-						echo "<tr><td><a href = 'index.php'>Back</a></td><td><div id = 'reply_button' onclick = \"reply('". $msg[0] . "', '" . addslashes($msg[1]) . "')\">Reply</div></td>";
+						echo "<tr><td><a href = 'index.php'>Back</a></td>";
 					echo "</table>";
 				?>
 			</div> <!-- m_body -->

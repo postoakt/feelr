@@ -303,10 +303,14 @@
 			echo "<thead><tr><td>To</td><td>Subject</td><td>Message</td><td>Date</td></tr></thead>";
 			while ($row = mysqli_fetch_assoc($result)){
 				$body = $row['body'];
+				$subj = $row['subj'];
 				if (strlen($body) > 10){
 					$body = substr($body, 0, 10) . "...";
 				}
-				echo "<tr><td>" . $row['recipient'] . "</td><td>" . $row['subj'] . "</td><td>" . $body . "</td><td>" . date('M j Y g:i A', strtotime($row['date'])) . "</td></tr>";		
+				if(strlen($subj) > 10){
+					$subj = substr($subj, 0, 10) . "...";
+				}
+				echo "<tr onclick = 'viewsent(" . $row['MID'] . ")' style = 'cursor:pointer;'><td>" . $row['recipient'] . "</td><td>" . $row['subj'] . "</td><td>" . $body . "</td><td>" . date('M j Y g:i A', strtotime($row['date'])) . "</td></tr>";		
 			}
 			echo "</table>";
 		}
@@ -319,11 +323,11 @@
 		$to = "";
 		$subj = "";
 		
-		if (isset($_GET['r']))
-			$to = $_GET['r'];
+		if (isset($_POST['r']))
+			$to = $_POST['r'];
 		
-		if (isset($_GET['s']))
-			$subj = $_GET['s'];
+		if (isset($_POST['s']))
+			$subj = $_POST['s'];
 		
 		echo "<form action = 'send.php' method = 'post' onsubmit = 'return validate_form()' autocomplete = 'off'>
 				<table class = 'c_form'>
@@ -331,7 +335,8 @@
 				<tr><td>Subject:</td><td><input style = 'float: right; width: 100%;' type = 'text' id = 'r_subj' name = 'subj' value = '" . $subj . "'></td></tr>
 				<tr><td colspan = '2'><textarea id = 'f_body' name = 'body' class = 'p_msg'></textarea></td></tr>
 				<tr><td>Prove that you are human:</td><td><div style = 'float:right;' class='g-recaptcha' data-sitekey='6LcplwoTAAAAADHuYr9GlOszT-Qx_y0g_WhlAxO9'></div></td></tr>
-				<tr><td></td><td><input class = 's_post' type = 'submit' value = 'send'></td></tr>
+				<tr><td><div id = 'err_msg' style = 'font-size: 1em; color: red; float: right;'></div></td>
+				<td><input class = 's_post' type = 'submit' value = 'send'></td></tr>
 				</table>
 				</form>";
 	} //compose_msg($user)
