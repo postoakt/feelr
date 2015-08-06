@@ -64,3 +64,56 @@ table{
 	border-right: 1px solid #efefef;
 	border-top: 1px solid #efefef;
 }
+
+.c_form{
+	margin: 0 auto;
+	margin-top: 64px;
+	font-size: .7em;
+}
+
+#v_body{
+	width: 512px;
+	height 512px;
+	margin: 0 auto;
+	margin-top: 64px;
+	font-family: "Shift", Verdana;
+}
+
+#v_body a{
+	color: #3399FF;
+	position: relative;
+	top: 4px;
+	left: 4px;
+	font-size: 1em;
+	float: left;
+	line-height: 32px;
+	vertical-align: middle;
+}
+
+.v_msg{
+	width: 512px;
+	min-height: 256px;
+	border: 1px inset #000000;
+	text-align: left;
+	border-radius: 3px;
+	background-color: #ffffff;
+	word-wrap: break-word;
+	padding: 8px;
+}
+
+#reply_button{
+	width: 64px;
+	height: 32px;
+	float: right;
+	background-color: #3399FF;
+	color: #efefef;
+	margin: 2px;
+	font-size: .8em;
+	line-height: 32px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+#reply_button:hover{
+	background-color: #297ACC;
+}

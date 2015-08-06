@@ -10,8 +10,13 @@
 		return $stmt->affected_rows;
 	} //insert_post($user, $body)
 	
-	function send_message($to, $from, $subj, $body){
-		
+	function send_message($from, $to, $subj, $body){
+		$mysqli = new mysqli(SERVER, USER, PW, DB);
+		$query = "INSERT INTO messages (sender, recipient, subj, body) VALUES (?, ?, ?, ?)";
+		$stmt = $mysqli->prepare($query);
+		$stmt->bind_param('ssss', $from, $to, $subj, $body);
+		$stmt->execute();
+		return $stmt->affected_rows;
 	} //send_message($to, $from, $subj, $body)
 	
 	function is_email_in_use($email){
@@ -262,7 +267,7 @@
 	
 	function echo_inbox($user){
 		$con = mysqli_connect(SERVER, USER, PW, DB);
-		$query = "SELECT * FROM messages WHERE recipient = '" . $user . "' ORDER BY date ASC";
+		$query = "SELECT * FROM messages WHERE recipient = '" . $user . "' ORDER BY date DESC";
 		$result = mysqli_query($con, $query);
 		$len = mysqli_num_rows($result);
 
@@ -271,12 +276,16 @@
 			echo "<thead><tr><td>From</td><td>Subject</td><td>Message</td><td>Date</td></tr></thead>";
 			while ($row = mysqli_fetch_assoc($result)){
 				$body = $row['body'];
+				$subj = $row['subj'];
 				if (strlen($body) > 10){
 					$body = substr($body, 0, 10) . "...";
 				}
-				echo "<tr><td>" . $row['sender'] . "</td><td>" . $row['subj'] . "</td><td>" . $body . "</td><td>" . date('M j Y g:i A', strtotime($row['date'])) . "</td></tr>";
-				echo "</table>";		
+				if(strlen($subj) > 10){
+					$subj = substr($subj, 0, 10) . "...";
+				}
+				echo "<tr onclick = 'viewmessage(" . $row['MID'] . ")' style = 'cursor:pointer;'><td>" . $row['sender'] . "</td><td>" . $subj . "</td><td>" . $body . "</td><td>" . date('M j Y g:i A', strtotime($row['date'])) . "</td></tr></a>";	
 			}
+			echo "</table>";
 		}
 		else{
 			echo "<div style = 'margin: 0 auto; margin-top: 64px; text-align: center; font-family: 'Shift', Sans-Serif;'>No messages to display. </div>";
@@ -285,27 +294,54 @@
 	
 	function echo_sentbox($user){
 		$con = mysqli_connect(SERVER, USER, PW, DB);
-		$query = "SELECT * FROM messages WHERE sender = '" . $user . "' ORDER BY date ASC";
+		$query = "SELECT * FROM messages WHERE sender = '" . $user . "' ORDER BY date DESC";
 		$result = mysqli_query($con, $query);
 		$len = mysqli_num_rows($result);
 
 		if ($len > 0){
 			echo "<table class='t-hover'>";
-			echo "<thead><tr><td>From</td><td>Subject</td><td>Message</td><td>Date</td></tr></thead>";
+			echo "<thead><tr><td>To</td><td>Subject</td><td>Message</td><td>Date</td></tr></thead>";
 			while ($row = mysqli_fetch_assoc($result)){
 				$body = $row['body'];
 				if (strlen($body) > 10){
 					$body = substr($body, 0, 10) . "...";
 				}
-				echo "<tr><td>" . $row['sender'] . "</td><td>" . $row['subj'] . "</td><td>" . $body . "</td><td>" . date('M j Y g:i A', strtotime($row['date'])) . "</td></tr>";
-				echo "</table>";		
+				echo "<tr><td>" . $row['recipient'] . "</td><td>" . $row['subj'] . "</td><td>" . $body . "</td><td>" . date('M j Y g:i A', strtotime($row['date'])) . "</td></tr>";		
 			}
+			echo "</table>";
 		}
 		else{
 			echo "<div style = 'margin: 0 auto; margin-top: 64px; text-align: center; font-family: 'Shift', Sans-Serif;'>No messages to display. </div>";
 		}	
 	} //echo_sentbox($user)
 	
-	function compose_msg($user){
+	function compose_msg(){
+		$to = "";
+		$subj = "";
+		
+		if (isset($_GET['r']))
+			$to = $_GET['r'];
+		
+		if (isset($_GET['s']))
+			$subj = $_GET['s'];
+		
+		echo "<form action = 'send.php' method = 'post' onsubmit = 'return validate_form()' autocomplete = 'off'>
+				<table class = 'c_form'>
+				<tr><td>To:</td><td><input onkeyup = 'validateUser()' style = 'float: right; width: 100%;' type = 'text' id = 'r_username' name = 'r_user' value = '" . $to . "' valid = 0></td></tr>
+				<tr><td>Subject:</td><td><input style = 'float: right; width: 100%;' type = 'text' id = 'r_subj' name = 'subj' value = '" . $subj . "'></td></tr>
+				<tr><td colspan = '2'><textarea id = 'f_body' name = 'body' class = 'p_msg'></textarea></td></tr>
+				<tr><td>Prove that you are human:</td><td><div style = 'float:right;' class='g-recaptcha' data-sitekey='6LcplwoTAAAAADHuYr9GlOszT-Qx_y0g_WhlAxO9'></div></td></tr>
+				<tr><td></td><td><input class = 's_post' type = 'submit' value = 'send'></td></tr>
+				</table>
+				</form>";
 	} //compose_msg($user)
+	
+	function retrieve_message_by_id($mid){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM messages WHERE MID = " . $mid;
+		$result = mysqli_query($con, $query);
+		$row = mysqli_fetch_assoc($result);
+		$msg = array($row['sender'], $row['subj'], $row['body']);
+		return $msg;
+	}
 ?>

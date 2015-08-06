@@ -5,14 +5,16 @@
 		<!-- Google-hosted jQuery -->
 		<script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		
-		<!-- Bootstrap -->
-		<!--<link rel = "stylesheet" type = "text/css" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
-		
-		<script src = "../js/feel.js"></script>
+		<!-- Google reCaptcha -->
+		<script src='https://www.google.com/recaptcha/api.js'></script>
+
 		<script src = "../js/logout.js"></script>
 		
 		<link rel = "stylesheet" type = "text/css" href = "../css/feels.css">
 		<link rel = "stylesheet" type = "text/css" href = "../css/messages.css">
+		
+		<script src = '../js/messages.js'></script>
+		
 	</head>
 	<body>
 		<div id = "wrapper">
@@ -73,7 +75,7 @@
 							break;
 						case "s": echo_sentbox($username);
 							break;
-						case "c":
+						case "c": compose_msg();
 							break;
 						default: echo_inbox($username);
 					}

@@ -5,6 +5,10 @@ body, html{
 	background-color:#000000;
 }
 
+a{
+	outline: none;
+}
+
 .jumbotron{
 	width: 100%;
 	height: 100%;	

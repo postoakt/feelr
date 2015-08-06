@@ -1,3 +1,4 @@
+<?php session_start(); if (isset($_SESSION['username'])){header("location: feels"); die();} ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -47,11 +48,16 @@
 		</div> <!-- jumbotron -->
 		<div class = 'foot'>
 			<ul class = 'f_list'>
-				<li><a href = "#">About</a></li>
+				<li><a id = 'expand' href = "#">About</a></li>
 				<li><a href = "#">Sign In</a></li>
 				<li><a href = "signup">Register</a></li>
 				<li><a href = "feels">Anon</a></li>
 			</ul>
 		</div> <!-- foot -->
+		<div class = 'about'>
+			<div class = 'b_quote'>Feel it is a place for anyone to say whatever they want, anonymously. Share your secrets, your desires, or just how you feel at the time - whether that be angry, joyous, apathetic, comedic, depressed, or just contemplative. This a safe place to breathe, my friends.</br></br>
+				<div class = 'sig'> -Scout</div>
+			</div> <!-- b_quote -->
+		</div><!-- about -->
 	</body>
 </html>
