@@ -31,6 +31,7 @@ function main(){
 	
 	var toggle = true;
 	$('.error_msg').hide();
+	$('.reset_result').hide();
 	$('.b_quote').hide();
 	$('.i_submit').click(function(){
 		validateLogin();
@@ -54,6 +55,32 @@ function main(){
 			$("html, body").animate({ scrollTop: 0}, "slow");
 		}
 	});
+	
+	$('.r_submit').click(function(){
+		var email = document.getElementById("i_email").value;
+		if (validateEmail(email)){;
+			$posting = $.post("../scripts/reset_password.php", {email: email});
+			$posting.done(function(data){
+				if (data > 0){
+					$(this).html("Password reset successfully.");
+					$(this).css("color", "green");
+				}
+				else {
+					$(this).html("Email could not be validated.");
+					$(this).css("color", "red");
+				}
+			});
+		}
+		else{
+			$(this).html("Email could not be validated.");
+			$(this).css("color", "red");
+		}
+	});
 }
+
+function validateEmail(email){
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+} //validateEmail(email)
 
 $(document).ready(main);

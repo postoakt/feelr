@@ -43,20 +43,12 @@ function main(){
 						$('.error_msg').show();
 						$('.error_msg').html("There was an error processing your request.");		
 					}
-					else
-						$.ajax({
-							url: "../scripts/login.php",
-							method: "POST",
-							data: {email: em, password: pw}
-						}).done(function(result){
-							if (result > 0){
-								$('.row.row-centered').hide();
-								$('.error_msg').hide();
-								$('.reg_success').show();
-							}
-							else
-								$('error_msg').html("There was an error processing your request.");
-						});	//$.ajax -- login user
+					else{
+
+						$('.row.row-centered').hide();
+						$('.error_msg').hide();
+						$('.reg_success').show();
+					}
 				}); //$.ajax -- register user --
 		}	
 	});// $('.i_submit').click()

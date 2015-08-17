@@ -38,6 +38,27 @@
 		$stmt->store_result();
 		return $stmt->num_rows;	 	
 	} //is_username_in_use($username)
+	
+	function change_password($email, $newpass){
+		$mysqli = new mysqli(SERVER, USER, PW, DB);
+		$query = "UPDATE users SET password = '?' WHERE email = '?'";
+		$stmt = $mysqli->prepare($query);
+		$stmt->bind_param('ss', $newpass, $email);
+		$stmt->execute();
+		$stmt->store_result();
+		return $stmt->num_rows;	
+	}
+	
+	function genRandStr($length)
+	{
+		$charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!*()_';	
+	    $str = '';
+	    $count = strlen($charset);
+	    
+	    while ($length--)
+	        $str .= $charset[mt_rand(0, $count-1)];
+	    return $str;
+	}
 
 	function register_user($username, $email, $password){
 		$mysqli = new mysqli(SERVER, USER, PW, DB);

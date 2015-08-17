@@ -85,7 +85,6 @@ function reply(to, subj){
 	var form = $(html);
 	$('body').append(form);
 	form.submit();
-	//form.submit();
 }
 
 function addslashes(string) {

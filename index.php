@@ -7,8 +7,8 @@
 
 		<link rel = "stylesheet type = "text/stylesheet" href = "css/home.css">
 		
-		<!-- Google-hosted jQuery -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<!-- jQuery -->
+		<script src="js/jquery-2.1.4.min.js"></script>
 		
 		<script src = "js/home.js"></script>
 	</head>
@@ -40,6 +40,11 @@
 						<div class = "row row-centered">
 							<div class = "col-md-12">
 								<div class = "i_submit">Log In</div>
+							</div>
+						</div> <!-- row -->
+						<div class = "row row-centered">
+							<div class = "col-md-12">
+								<div class = "forgot_msg"><a href = "forgot/index.php">Forgot your password?</a></div>
 							</div>
 						</div> <!-- row -->
 					</form> <!-- form -->
