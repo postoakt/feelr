@@ -26,9 +26,10 @@
 						require_once('../scripts/functions.php');
 						if (isset($_SESSION['logged_in'])){
 							$msg_count = get_message_count($_SESSION['username']);
-							echo "<li>" . $_SESSION['username'] . " -</li>
-								  <li><a href = '../messages'> messages (" . $msg_count . ") </a> - </li>
-						          <li><a href = '#' onclick = 'logout()'>sign out</a></li>";
+							echo "<a onclick = \"pop_window('../changepass')\"
+							      href = 'javascript:void(0)'><li>" . $_SESSION['username'] . " -</li></a>
+							<li><a href = '../messages'> messages (" . $msg_count . ") </a> - </li>
+							<li><a href = '#' onclick = 'logout()'>sign out</a></li>";
 						}
 						else{
 							echo "<li><a href = '../'><div class = 'log_in'>log in</div></a></li>

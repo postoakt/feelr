@@ -28,4 +28,10 @@ function main() {
 	
 };
 
+function pop_window(url){
+	newwindow=window.open(url,'name','height=304,width=304');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
+
 $(document).ready(main);

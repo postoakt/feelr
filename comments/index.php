@@ -49,8 +49,9 @@
 
 						if (isset($_SESSION['logged_in'])){
 							$msg_count = get_message_count($_SESSION['username']);
-							echo "<li>" . $_SESSION['username'] . " -</li>
-							<li>messages (" . $msg_count . ") -</li>
+							echo "<a onclick = \"pop_window('../changepass')\"
+							      href = 'javascript:void(0)'><li>" . $_SESSION['username'] . " -</li></a>
+							<li><a href = '../messages'> messages (" . $msg_count . ") </a> - </li>
 							<li><a href = '#' onclick = 'logout()'>sign out</a></li>";
 						}
 						else {

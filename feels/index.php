@@ -11,7 +11,7 @@
 	<body>
 		<div id = "wrapper">
 			<div id = "header">
-				<h1><a href = "../">feel it</a></h1>
+				<h1><a style ="text-decoration:none;" href = "../">feel it</a></h1>
 				<p>let it all out.</p>
 				<ul class = "nav">
 					<?php
@@ -19,7 +19,8 @@
 						require_once('../scripts/functions.php');
 						if (isset($_SESSION['logged_in'])){
 							$msg_count = get_message_count($_SESSION['username']);
-							echo "<li>" . $_SESSION['username'] . " -</li>
+							echo "<a onclick = \"pop_window('../changepass')\"
+							      href = 'javascript:void(0)'><li>" . $_SESSION['username'] . " -</li></a>
 							<li><a href = '../messages'> messages (" . $msg_count . ") </a> - </li>
 							<li><a href = '#' onclick = 'logout()'>sign out</a></li>";
 						}

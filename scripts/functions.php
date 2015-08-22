@@ -41,12 +41,31 @@
 	
 	function change_password($email, $newpass){
 		$mysqli = new mysqli(SERVER, USER, PW, DB);
-		$query = "UPDATE users SET password = '?' WHERE email = '?'";
+		$query = "UPDATE users SET password = ? WHERE email = ?";
 		$stmt = $mysqli->prepare($query);
 		$stmt->bind_param('ss', $newpass, $email);
 		$stmt->execute();
-		$stmt->store_result();
+		$stmt->store_result();	
 		return $stmt->num_rows;	
+	}
+	
+	function is_valid_login($email, $pass){
+		$mysqli = new mysqli(SERVER, USER, PW, DB);
+		$query = "SELECT * FROM users WHERE email = ? AND password = ?";
+		$stmt = $mysqli->prepare($query);
+		$stmt->bind_param('ss', $email, $pass);
+		$stmt->execute();
+		$stmt->store_result();
+		return $stmt->num_rows;	 
+		
+	}
+	
+	function get_email($username){
+		$con = mysqli_connect(SERVER, USER, PW, DB);
+		$query = "SELECT email FROM users WHERE username = '" . $username . "'";
+		$result = mysqli_query($con, $query);
+		$row = mysqli_fetch_assoc($result);
+		return $row['email'];
 	}
 	
 	function genRandStr($length)
